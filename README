@@ -2,15 +2,29 @@ vim_puppet
 
 This is the vim_puppet module.
 
+=== Parameters
+
+ [*user_name*]
+   An array of user which you wish to setup vim-puppet for
+
+=== Examples
+
+  class { vim_puppet:
+    $user_name => ['user1','user2','user3']
+  }
+
+
 License
 -------
 GPL
 
 Contact
 -------
-Jason Cox <j_cox@globelock.dydns.info>
+Jason Cox <j_cox@globelock.dyndns.info>
 
 Support
 -------
 
-Please Email
+Please log tickets and issues at our github page(https://github.com/jlcox1970/vim-puppet)
+
+
