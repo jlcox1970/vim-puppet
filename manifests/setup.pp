@@ -11,6 +11,7 @@ define vim_puppet::setup (
   }
   exec {"$user_name mkdir for vim":
     command => "mkdir -p ${vim_dir}/autoload ${vim_dir}/bundle",
+    onlyif  => "test ! -d ${vim_dir}/autoload ${vim_dir}/bundle",
   } ->
   file {"$home_path/.vimrc":
     ensure => file,
@@ -19,6 +20,7 @@ define vim_puppet::setup (
   } ->
   exec {"$user_name load pathogen":
     command => "curl -LSso ${vim_dir}/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim",
+    onlyif  => "test ! -f ${vim_dir}/autoload/pathogen.vim",
   } ->
   file_line {"$user_name execute pathogen#infect()":
     line => 'execute pathogen#infect()',
