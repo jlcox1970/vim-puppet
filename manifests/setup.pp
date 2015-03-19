@@ -22,39 +22,39 @@ define vim_puppet::setup (
     command => "curl -LSso ${vim_dir}/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim",
     onlyif  => "test ! -f ${vim_dir}/autoload/pathogen.vim",
   } ->
-  file_line {"$user_name execute pathogen#infect()":
+  file_line {"${user_name} execute pathogen#infect()":
     line => 'execute pathogen#infect()',
-    path => $vimrc
+    path => $vimrc,
   } ->
-  file_line {"$user_name syntax on":
+  file_line {"${user_name} syntax on":
     line => 'syntax on',
-    path => $vimrc
+    path => $vimrc,
   } ->
-  file_line {"$user_name filetype plugin indent on":
+  file_line {"${user_name} filetype plugin indent on":
     line =>  'filetype plugin indent on',
-    path => $vimrc
+    path => $vimrc,
   } ->
   exec {"$user_name update vim-puppet":
     cwd     => "${vim_dir}/bundle/puppet",
-    command => "git pull",
+    command => 'git pull',
     onlyif  => "test -d ${vim_dir}/bundle/puppet/.git",
   } ->
-  exec {"$user_name install vim-puppet":
+  exec {"${user_name} install vim-puppet":
     cwd     => "${vim_dir}/bundle",
     command => "git clone git://github.com/rodjek/vim-puppet.git ${vim_dir}/bundle/puppet",
     onlyif  => "test ! -d ${vim_dir}/bundle/puppet/.git",
   } ->
-  exec {"$user_name update tabular":
+  exec {"${user_name} update tabular":
     cwd     => "${vim_dir}/bundle/tabular",
-    command => "git pull",
+    command => 'git pull',
     onlyif  => "test -d ${vim_dir}/bundle/tabular/.git",
   } ->
-  exec {"$user_name install tabular":
+  exec {"${user_name} install tabular":
     cwd     => "${vim_dir}/bundle",
-    command => "git clone git://github.com/godlygeek/tabular.git",
+    command => 'git clone git://github.com/godlygeek/tabular.git',
     onlyif  => "test ! -d ${vim_dir}/bundle/tabular/.git",
   } ->
-  exec {"$user_name setup perms on .vim" :
+  exec {"${user_name} setup perms on .vim" :
     cwd     => $home_path,
     command => "chown ${user_name}.${user_name} ${vim_dir} -R",
   }

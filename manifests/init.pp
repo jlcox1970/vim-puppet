@@ -22,8 +22,7 @@
 # Copyright 2014 Jason Cox, unless otherwise noted.
 #
 class vim_puppet (
-  $user_name = pick($users,'undef'),
-
+  $user_name = 'undef'
 ){
   package {'vim-enhanced':
     ensure => installed,
