@@ -9,16 +9,16 @@ define vim_puppet::setup (
   Exec {
     path => '/bin:/usr/bin',
   }
-  exec {"$user_name mkdir for vim":
+  exec {"${user_name} mkdir for vim":
     command => "mkdir -p ${vim_dir}/autoload ${vim_dir}/bundle",
     onlyif  => "test ! -d ${vim_dir}/autoload ${vim_dir}/bundle",
   } ->
-  file {"$home_path/.vimrc":
+  file {"${home_path}/.vimrc":
     ensure => file,
     owner  => $user_name,
     group  => $user_name,
   } ->
-  exec {"$user_name load pathogen":
+  exec {"${user_name} load pathogen":
     command => "curl -LSso ${vim_dir}/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim",
     onlyif  => "test ! -f ${vim_dir}/autoload/pathogen.vim",
   } ->
@@ -34,7 +34,7 @@ define vim_puppet::setup (
     line =>  'filetype plugin indent on',
     path => $vimrc,
   } ->
-  exec {"$user_name update vim-puppet":
+  exec {"${user_name} update vim-puppet":
     cwd     => "${vim_dir}/bundle/puppet",
     command => 'git pull',
     onlyif  => "test -d ${vim_dir}/bundle/puppet/.git",

@@ -34,9 +34,10 @@ class vim_puppet (
     ensure => installed,
   } ->
   file {'/bin/vi' :
-    ensure => '/usr/bin/vim',
-    mode   => '755',
-  } 
+    ensure => link,
+    target =>'/usr/bin/vim',
+    mode   => '0755',
+  }
   if $user_name !=  'undef' {
     vim_puppet::setup { $user_name : }
   }
