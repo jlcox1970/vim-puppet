@@ -9,7 +9,7 @@
   "source": "https://github.com/jlcox1970/vim-puppet/",
   "summary": "Module to setup VI with puppet syntaxt checking etc via the vim-puppet plugin",
   "tags": [],
-  "version": "0.1.3",
+  "version": "0.1.4",
   "issues_url": "https://github.com/jlcox1970/vim-puppet/issues",
   "operatingsystem_support": [
     {
